@@ -1,9 +1,7 @@
 package br.com.caelum.agiletickets.persistencia;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
 import br.com.caelum.agiletickets.domain.Agenda;
 import br.com.caelum.agiletickets.domain.Relogio;
 import br.com.caelum.agiletickets.models.Espetaculo;
@@ -27,7 +25,6 @@ public class JPAEspetaculoDao implements Agenda {
 		return manager.createQuery("select e from Espetaculo e").getResultList();
 	}
 
-	@Override
 	public void cadastra(Espetaculo espetaculo) {
 		manager.persist(espetaculo);
 	}

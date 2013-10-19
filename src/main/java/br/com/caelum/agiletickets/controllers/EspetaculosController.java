@@ -3,14 +3,11 @@ package br.com.caelum.agiletickets.controllers;
 import static br.com.caelum.vraptor.view.Results.status;
 
 import java.util.List;
-
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-
 import br.com.caelum.agiletickets.domain.Agenda;
 import br.com.caelum.agiletickets.domain.DiretorioDeEstabelecimentos;
 import br.com.caelum.agiletickets.models.Espetaculo;
-import br.com.caelum.agiletickets.models.Estabelecimento;
 import br.com.caelum.agiletickets.models.Periodicidade;
 import br.com.caelum.agiletickets.models.Sessao;
 import br.com.caelum.vraptor.Get;
