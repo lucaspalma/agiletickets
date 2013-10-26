@@ -93,11 +93,9 @@ public class EspetaculosController {
 			return;
 		}
 
-		extracted(quantidade);
+		validaQuatidadeIngressos(quantidade);
 
-		if (!sessao.podeReservar(quantidade)) {
-			validator.add(new ValidationMessage("Nao existem ingressos dispon√≠veis", ""));
-		}
+		validaQuantidadeReservaDisponiveis(quantidade, sessao);
 
 		// em caso de erro, redireciona para a lista de sessao
 		validator.onErrorRedirectTo(this).sessao(sessao.getId());
@@ -108,7 +106,13 @@ public class EspetaculosController {
 		result.redirectTo(IndexController.class).index();
 	}
 
-	private void extracted(final Integer quantidade) {
+	private void validaQuantidadeReservaDisponiveis(final Integer quantidade, Sessao sessao) {
+		if (!sessao.podeReservar(quantidade)) {
+			validator.add(new ValidationMessage("Nao existem ingressos dispon√≠veis", ""));
+		}
+	}
+
+	private void validaQuatidadeIngressos(final Integer quantidade) {
 		if (quantidade < 1) {
 			validator.add(new ValidationMessage("Voce deve escolher um lugar ou mais", ""));
 		}
@@ -138,11 +142,15 @@ public class EspetaculosController {
 
 	private Espetaculo carregaEspetaculo(Long espetaculoId) {
 		Espetaculo espetaculo = agenda.espetaculo(espetaculoId);
+		validaEspetaculoNaoNulo(espetaculo);
+		return espetaculo;
+	}
+
+	private void validaEspetaculoNaoNulo(Espetaculo espetaculo) {
 		if (espetaculo == null) {
 			validator.add(new ValidationMessage("", ""));
 		}
 		validator.onErrorUse(status()).notFound();
-		return espetaculo;
 	}
 
 }
