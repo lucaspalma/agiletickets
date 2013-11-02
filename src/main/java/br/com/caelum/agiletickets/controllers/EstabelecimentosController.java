@@ -44,5 +44,4 @@ public class EstabelecimentosController {
 		diretorio.adiciona(estabelecimento);
 		result.redirectTo(this).lista();
 	}
-
 }

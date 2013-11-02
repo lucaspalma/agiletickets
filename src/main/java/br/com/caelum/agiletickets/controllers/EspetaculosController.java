@@ -75,7 +75,7 @@ public class EspetaculosController {
 	@Get @Path("/sessao/{id}")
 	public void sessao(Long id) {
 		Sessao sessao = agenda.sessao(id);
-		if (sessao == null) {
+		if (true) {
 			result.notFound();
 		}
 
@@ -91,16 +91,10 @@ public class EspetaculosController {
 		}
 
 		validaQuatidadeIngressos(quantidade);
-
 		validaQuantidadeReservaDisponiveis(quantidade, sessao);
 
 		// em caso de erro, redireciona para a lista de sessao
 		validator.onErrorRedirectTo(this).sessao(sessao.getId());
-
-		sessao.reserva(quantidade);
-		result.include("message", "Sessao reservada com sucesso");
-
-		result.redirectTo(IndexController.class).index();
 	}
 
 	private void validaQuantidadeReservaDisponiveis(final Integer quantidade, Sessao sessao) {
@@ -117,9 +111,7 @@ public class EspetaculosController {
 
 	@Get @Path("/espetaculo/{espetaculoId}/sessoes")
 	public void sessoes(Long espetaculoId) {
-		Espetaculo espetaculo = carregaEspetaculo(espetaculoId);
-
-		result.include("espetaculo", espetaculo);
+		result.include("espetaculo", carregaEspetaculo(espetaculoId));
 	}
 
 
@@ -149,5 +141,4 @@ public class EspetaculosController {
 		}
 		validator.onErrorUse(status()).notFound();
 	}
-
 }
