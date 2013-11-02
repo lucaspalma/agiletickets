@@ -1,7 +1,8 @@
 <project name="agiletickets" default="war" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property file="build.properties" />
-
+	<property name="persistence" value="persistence.xml" />
+	
 	<!-- paths -->
 	<path id="lib.path.id">
 		<fileset dir="${lib.dir}" />
@@ -86,6 +87,8 @@
           target: war
          ================================= -->
 	<target name="war" description="--> generate war file" depends="test">
+		<move file="${build.dir}/META-INF/${persistence}" 
+			tofile="${build.dir}/META-INF/persistence.xml"/>
 		<war destfile="${output.dir}/${project.name}.war">
 			<zipfileset dir="${webapp.dir}" />
 		</war>
