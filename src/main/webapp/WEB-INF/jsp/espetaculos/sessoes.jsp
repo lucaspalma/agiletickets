@@ -5,6 +5,7 @@
 	<body>
 		<h2>Criar novas sessões</h2>
 		<form action="/espetaculo/${espetaculo.id}/sessoes" method="post">
+			<input type="hidden" name="espetaculoId" value="${espetaculo.id}">
 			<label for="inicio">Início</label>
 			<input type="text" name="inicio" id="inicio"/>
 						

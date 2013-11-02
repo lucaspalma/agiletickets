@@ -17,8 +17,6 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
-import br.com.caelum.agiletickets.exceptions.DataInicioSuperiorDataFimException;
-
 
 @Entity
 public class Espetaculo {
@@ -100,7 +98,7 @@ public class Espetaculo {
 	 */
 	public List<Sessao> criaSessoes(LocalDate inicio, LocalDate fim,
 			LocalTime horario, Periodicidade periodicidade) {
-		if (inicio.isAfter(fim)) throw new DataInicioSuperiorDataFimException();
+		if (inicio.isAfter(fim)) throw new RuntimeException();
 
 		int numeroDias = Days.daysBetween(inicio, fim).getDays();
 		

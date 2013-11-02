@@ -11,8 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.caelum.agiletickets.exceptions.DataInicioSuperiorDataFimException;
-
 
 public class EspetaculoTest {
 
@@ -112,7 +110,7 @@ public class EspetaculoTest {
 		Assert.assertEquals("16:10", sessao.getHora());
 	}
 	
-	@Test(expected = DataInicioSuperiorDataFimException.class)
+	@Test(expected = RuntimeException.class)
 	public void naoDeveCriarSessoesSeInicioDepoisDoFim() throws Exception {
 		LocalDate inicio = new LocalDate(2013, 10, 26);
 		LocalDate fim = new LocalDate(2013, 10, 25);

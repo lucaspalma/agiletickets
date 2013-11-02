@@ -75,7 +75,7 @@ public class EspetaculosController {
 	@Get @Path("/sessao/{id}")
 	public void sessao(Long id) {
 		Sessao sessao = agenda.sessao(id);
-		if (true) {
+		if (sessao == null) {
 			result.notFound();
 		}
 
@@ -95,6 +95,9 @@ public class EspetaculosController {
 
 		// em caso de erro, redireciona para a lista de sessao
 		validator.onErrorRedirectTo(this).sessao(sessao.getId());
+		sessao.reserva(quantidade);
+		result.include("message", "Sessao reservada com sucesso");
+		result.redirectTo(IndexController.class).index();
 	}
 
 	private void validaQuantidadeReservaDisponiveis(final Integer quantidade, Sessao sessao) {
